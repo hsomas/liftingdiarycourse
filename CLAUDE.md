@@ -7,7 +7,9 @@
 ### Available Documentation
 
 - `/docs/ui.md` - UI components and styling guidelines
-- `/docs/data-fetching.md` - data fetching guidelines 
+- `/docs/data-fetching.md` - data fetching guidelines
+- `/docs/data-mutations.md` - data mutations guidelines (server actions, validation)
+- `/docs/auth.md` - authentication guidelines (Clerk) 
 
 ### Workflow
 

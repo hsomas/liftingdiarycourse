@@ -1,7 +1,12 @@
 import { db } from "@/src/db";
-import { workouts } from "@/src/db/schema";
+import { workouts, NewWorkout } from "@/src/db/schema";
 import { eq, and } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
+
+export async function createWorkout(data: NewWorkout) {
+  const [workout] = await db.insert(workouts).values(data).returning();
+  return workout;
+}
 
 export async function getWorkoutsByDate(date: Date) {
   const { userId } = await auth();
