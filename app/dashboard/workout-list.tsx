@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -39,39 +40,41 @@ export function WorkoutList({ workouts, dateString }: WorkoutListProps) {
       ) : (
         <div className="grid gap-4">
           {workouts.map((workout) => (
-            <Card key={workout.id}>
-              <CardHeader>
-                <CardTitle>{workout.name || "Workout"}</CardTitle>
-                <CardDescription>
-                  {workout.workoutExercises.length} exercise
-                  {workout.workoutExercises.length !== 1 ? "s" : ""}
-                </CardDescription>
-              </CardHeader>
-              {workout.workoutExercises.length > 0 && (
-                <CardContent>
-                  <div className="space-y-3">
-                    {workout.workoutExercises.map((workoutExercise) => (
-                      <div
-                        key={workoutExercise.id}
-                        className="border-l-2 border-muted pl-3"
-                      >
-                        <p className="font-medium">
-                          {workoutExercise.exercise.name}
-                        </p>
-                        <div className="text-sm text-muted-foreground">
-                          {workoutExercise.sets.map((set, index) => (
-                            <span key={set.id}>
-                              {index > 0 && " | "}
-                              {set.reps} reps @ {set.weight} {set.unit}
-                            </span>
-                          ))}
+            <Link key={workout.id} href={`/dashboard/workout/${workout.id}`}>
+              <Card className="transition-colors hover:bg-muted/50">
+                <CardHeader>
+                  <CardTitle>{workout.name || "Workout"}</CardTitle>
+                  <CardDescription>
+                    {workout.workoutExercises.length} exercise
+                    {workout.workoutExercises.length !== 1 ? "s" : ""}
+                  </CardDescription>
+                </CardHeader>
+                {workout.workoutExercises.length > 0 && (
+                  <CardContent>
+                    <div className="space-y-3">
+                      {workout.workoutExercises.map((workoutExercise) => (
+                        <div
+                          key={workoutExercise.id}
+                          className="border-l-2 border-muted pl-3"
+                        >
+                          <p className="font-medium">
+                            {workoutExercise.exercise.name}
+                          </p>
+                          <div className="text-sm text-muted-foreground">
+                            {workoutExercise.sets.map((set, index) => (
+                              <span key={set.id}>
+                                {index > 0 && " | "}
+                                {set.reps} reps @ {set.weight} {set.unit}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              )}
-            </Card>
+                      ))}
+                    </div>
+                  </CardContent>
+                )}
+              </Card>
+            </Link>
           ))}
         </div>
       )}
