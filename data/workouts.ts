@@ -37,3 +37,30 @@ export async function getWorkoutsByDate(date: Date) {
 export type WorkoutWithDetails = Awaited<
   ReturnType<typeof getWorkoutsByDate>
 >[number];
+
+export async function getWorkoutById(workoutId: string) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
+
+  const workout = await db.query.workouts.findFirst({
+    where: and(eq(workouts.id, workoutId), eq(workouts.userId, userId)),
+  });
+
+  return workout;
+}
+
+export async function updateWorkout(
+  id: string,
+  userId: string,
+  data: { name?: string; date?: string }
+) {
+  const [workout] = await db
+    .update(workouts)
+    .set(data)
+    .where(and(eq(workouts.id, id), eq(workouts.userId, userId)))
+    .returning();
+  return workout;
+}

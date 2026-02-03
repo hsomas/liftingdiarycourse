@@ -9,7 +9,9 @@
 - `/docs/ui.md` - UI components and styling guidelines
 - `/docs/data-fetching.md` - data fetching guidelines
 - `/docs/data-mutations.md` - data mutations guidelines (server actions, validation)
-- `/docs/auth.md` - authentication guidelines (Clerk) 
+- `/docs/auth.md` - authentication guidelines (Clerk)
+- `/docs/server-components.md` - server component coding standards (Next.js 15 async params)
+- `/docs/routing.md` - routing standards (protected routes, middleware) 
 
 ### Workflow
 
