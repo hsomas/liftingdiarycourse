@@ -8,14 +8,12 @@ export async function createWorkout(data: NewWorkout) {
   return workout;
 }
 
-export async function getWorkoutsByDate(date: Date) {
+export async function getWorkoutsByDate(dateString: string) {
   const { userId } = await auth();
 
   if (!userId) {
     throw new Error("Unauthorized");
   }
-
-  const dateString = date.toISOString().split("T")[0];
 
   const userWorkouts = await db.query.workouts.findMany({
     where: and(eq(workouts.userId, userId), eq(workouts.date, dateString)),

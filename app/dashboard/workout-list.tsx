@@ -10,10 +10,18 @@ import type { WorkoutWithDetails } from "@/data/workouts";
 
 interface WorkoutListProps {
   workouts: WorkoutWithDetails[];
-  date: Date;
+  dateString: string;
 }
 
-export function WorkoutList({ workouts, date }: WorkoutListProps) {
+/** Parse YYYY-MM-DD string to Date in local timezone */
+function parseDateString(dateString: string): Date {
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+export function WorkoutList({ workouts, dateString }: WorkoutListProps) {
+  const date = parseDateString(dateString);
+
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-semibold">
