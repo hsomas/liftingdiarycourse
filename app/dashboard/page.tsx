@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { getWorkoutsByDate } from "@/data/workouts";
+import { Button } from "@/components/ui/button";
 import { DatePicker } from "./date-picker";
 import { WorkoutList } from "./workout-list";
 
@@ -27,7 +29,12 @@ export default async function DashboardPage({
   return (
     <div className="container mx-auto p-6">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-3xl font-bold">Dashboard</h1>
+          <Button asChild>
+            <Link href="/dashboard/workout/new">New Workout</Link>
+          </Button>
+        </div>
         <DatePicker selectedDateString={selectedDateString} />
       </div>
 
